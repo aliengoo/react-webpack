@@ -7,3 +7,5 @@ _bower
 npm-debug.log
 xunit-output
 wwwroot
+!wwwroot/index.html
+client/**/__*

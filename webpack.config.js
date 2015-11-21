@@ -14,18 +14,24 @@ module.exports = {
       JQuery: 'jquery'
     })
   ],
-  externals: [
-    {
-      "jquery": "jQuery",
-      "bootstrap": "bootstrap"
-    }
-  ],
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude:  /(node_modules|bower_components|server|typings)/,
         loader: 'babel'
+      },
+      {
+        test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+        loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.css$/,
+        loaders: ['css']
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass", "autoprefixer?{browsers:['last 2 version']}"]
       }
     ]
   }
