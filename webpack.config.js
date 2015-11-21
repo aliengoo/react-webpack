@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   context: path.join(__dirname, "client"),
-  entry: './app.js',
+  entry: [ 'webpack/hot/dev-server', './app.js'],
   output: {
     path: path.join(__dirname, "wwwroot"),
     filename: "bundle.js"
@@ -12,7 +12,8 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       JQuery: 'jquery'
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [

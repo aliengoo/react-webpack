@@ -10,10 +10,20 @@ var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var WebpackDevServer = require('webpack-dev-server');
 
-process.env.UV_THREADPOOL_SIZE=5;
+var mainScssFile = path.join("./client", "app.scss");
+var importScssConfig = {
+  mainFile: [mainScssFile],
+  imports:[
+    "!" + mainScssFile,
+    path.join("!./client", "__app.scss"),
+    "./client/**/*.scss"
+  ]
+};
 
 // The development server (the recommended option for development)
-gulp.task("default", ["webpack-dev-server"]);
+gulp.task("default", ["webpack-dev-server"], function(){
+  gulp.watch(importScssConfig.imports, ["import:scss"]);
+});
 
 // Build and watch cycle (another option for development)
 // Advantage: No server required, can run app from filesystem
@@ -27,16 +37,8 @@ gulp.task("build-dev", ["webpack:build-dev"], function() {
 gulp.task("build", ["webpack:build"]);
 
 gulp.task("import:scss", function () {
-  // pipe the target file to the
-  var mainFile = [path.join("./client", "app.scss")];
-  var imports = [
-    "!" + mainFile[0],
-    path.join("!./client", "__app.scss"),
-    "./client/**/*.scss"
-  ];
-
-  return gulp.src(mainFile)
-    .pipe(lp.inject(gulp.src(imports, {read: false}), {
+  return gulp.src(importScssConfig.mainFile)
+    .pipe(lp.inject(gulp.src(importScssConfig.imports, {read: false}), {
       relative: true,
       starttag: '/* inject:imports */',
       endtag: '/* endinject */',
@@ -91,7 +93,7 @@ gulp.task("webpack:build-dev", function(callback) {
   });
 });
 
-gulp.task('webpack-dev-server', function (done) {
+gulp.task('webpack-dev-server', ['import:scss'], function () {
 
   var config = Object.create(webpackConfig);
   config.devtool = "eval";
@@ -100,6 +102,8 @@ gulp.task('webpack-dev-server', function (done) {
   var compiler = webpack(config);
 
   new WebpackDevServer(compiler, {
+    hot: true,
+    inline: true,
     path: path.join(__dirname, "wwwroot"),
     contentBase: path.join(__dirname, "wwwroot"),
     publicPath: '/',

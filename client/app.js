@@ -2,18 +2,42 @@
 
 require('../node_modules/bootstrap/dist/css/bootstrap.css');
 require('./__app.scss');
-
-import React from 'react';
-import ReactDOM from 'react-dom';
 global.jQuery = require('jquery');
 global.bootstrap = require('bootstrap');
 
-import Header from './components/Header';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-let Home = React.createClass({
-  render: function () {
-    return <Header>Hello, World!</Header>;
-  }
-});
+import {Router, Route, Link} from 'react-router';
+import history from 'history/lib/createHashHistory';
 
-ReactDOM.render(<Home/>, document.getElementById('react-container'));
+import { Provider } from 'react-redux';
+import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
+import store from './store';
+
+import Home from './home/Home';
+
+var reactContainer = document.getElementById('react-container');
+
+var providerRoot = <Provider store={store}>
+  <Router history={history()}>
+    <Route path="/" component={Home}/>
+  </Router>
+</Provider>;
+
+if (reactContainer.hasAttribute("debug")) {
+  ReactDOM.render(
+    <div>
+      {providerRoot}
+      <DebugPanel top right bottom>
+        <DevTools store={store} monitor={LogMonitor}/>
+      </DebugPanel>
+    </div>
+    , reactContainer);
+} else {
+  ReactDOM.render(
+    <div>
+      {providerRoot}
+    </div>
+    , reactContainer);
+}
