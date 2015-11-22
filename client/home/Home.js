@@ -9,7 +9,7 @@ var Home = React.createClass({
       <div>
         <Navbar/>
         <div className="container">
-          <Jumbotron>Home!</Jumbotron>
+          <Jumbotron>Home!!</Jumbotron>
         </div>
 
       </div>
