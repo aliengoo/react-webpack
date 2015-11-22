@@ -16,7 +16,7 @@ export default function movies(state = moviesInitialState, action) {
       case FetchStatus.COMPLETE:
         const completeState = Immutable.Map({
           err: null,
-          movies: action.data,
+          movies: Immutable.Iterable(action.data),
           fetching: false
         });
         return state.merge(completeState);

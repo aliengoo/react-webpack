@@ -7,7 +7,7 @@ import SearchInput from './components/SearchInput';
 import MoviesResults from './components/MoviesResults';
 
 // actions
-import {findMovies} from './moviesActions';
+import {findMovies, findMoviesByTitle} from './moviesActions';
 
 var Movies = React.createClass({
 
@@ -16,11 +16,7 @@ var Movies = React.createClass({
   },
 
   go: function (title) {
-
-    const find = {
-    };
-    find["DVD_Title"] = title;
-    this.props.dispatch(findMovies(find));
+    this.props.dispatch(findMoviesByTitle(title));
   },
 
   render: function () {
