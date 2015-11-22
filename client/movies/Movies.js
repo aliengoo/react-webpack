@@ -7,19 +7,22 @@ import SearchInput from './components/SearchInput';
 import MoviesResults from './components/MoviesResults';
 
 // actions
-import {findMovies} from './moviesActions';
+import {findMoviesWithTitle, findMovies} from './moviesActions';
 
 var Movies = React.createClass({
 
+  componentDidMount: function () {
+    this.props.dispatch(findMovies());
+  },
+
   go: function (title) {
-    this.props.dispatch(findMovies(title));
+    this.props.dispatch(findMoviesWithTitle(title));
   },
 
   render: function () {
 
     const {fetching, movies} = this.props.movies;
 
-    console.log(movies);
     return (
       <div>
         <Navbar/>
