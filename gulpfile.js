@@ -104,6 +104,8 @@ gulp.task('webpack-dev-server', ['import:scss'], function () {
   new WebpackDevServer(compiler, {
     hot: true,
     inline: true,
+    noInfo: true,
+    colors: true,
     path: path.join(__dirname, "wwwroot"),
     contentBase: path.join(__dirname, "wwwroot"),
     publicPath: '/',
