@@ -11,10 +11,10 @@ export {
   ActionTypes
 };
 
-export function findMovies(title) {
-  return invokeAsync("POST", "/movies", null, {
-    find: {
-      [DVD_Title]: title
-    }
+export function findMovies(find) {
+  console.log(find);
+
+  return invokeAsync("POST", "/api/movies", null, {
+    find
   }, ActionTypes.FIND_MOVIES, "movies");
 }

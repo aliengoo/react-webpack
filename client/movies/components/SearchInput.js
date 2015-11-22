@@ -18,7 +18,7 @@ var SearchInput = React.createClass({
     const {go, fetching} = this.props;
 
     return (
-      <div className="movies search-input">
+      <div className="search-input">
         <InputGroup>
           <input type="text" className="form-control" placeholder="Search for..." disabled={fetching} name="search" ref="search" />
           <span className="input-group-btn">

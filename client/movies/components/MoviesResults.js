@@ -22,7 +22,7 @@ var MoviesResults = React.createClass({
 
   renderWithMovies: function(movies) {
     return (
-      <table className="table table-bordered table-hover">
+      <table className="table table-bordered table-condensed table-hover movies-results">
         <thead>
           <tr>
             <th>Title</th>

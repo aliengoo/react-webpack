@@ -70,13 +70,13 @@ export function invokeAsync(method, url, query, data, actionType, actionContext)
         type: actionType,
         err: response.err,
         data: response.data,
-        fetchStatus: FetchStatus.FAILED
+        fetchStatus: FetchStatus.COMPLETE
       });
     }, (response) => {
       dispatch({
         context: actionContext,
         type: actionType,
-        fetchStatus: FetchStatus.COMPLETE,
+        fetchStatus: FetchStatus.FAILED,
         err: response.err
       });
     }).finally(() => {

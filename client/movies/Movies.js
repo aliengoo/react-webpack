@@ -11,15 +11,23 @@ import {findMovies} from './moviesActions';
 
 var Movies = React.createClass({
 
+  componentDidMount: function () {
+    this.props.dispatch(findMovies({}));
+  },
+
   go: function (title) {
-    this.props.dispatch(findMovies(title));
+
+    const find = {
+    };
+    find["DVD_Title"] = title;
+    this.props.dispatch(findMovies(find));
   },
 
   render: function () {
 
-    const {fetching, movies} = this.props.movies;
+    const fetching = this.props.movies.get('fetching');
+    const movies = this.props.movies.get('movies');
 
-    console.log(movies);
     return (
       <div>
         <Navbar/>
@@ -41,6 +49,5 @@ export default connect((state) => {
   return {
     movies: state.movies
   };
-
 
 })(Movies);

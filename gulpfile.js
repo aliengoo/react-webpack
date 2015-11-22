@@ -109,6 +109,9 @@ gulp.task('webpack-dev-server', ['import:scss'], function () {
     inline: true,
     noInfo: true,
     colors: true,
+    proxy: {
+      '/api/*': { target: 'http://localhost:3000'}
+    },
     path: path.join(__dirname, "wwwroot"),
     contentBase: path.join(__dirname, "wwwroot"),
     publicPath: '/',
