@@ -1,10 +1,10 @@
 "use strict";
 
 import Immutable from 'immutable';
-import homeInitialState from './home/homeInitialState';
-
-const home = Immutable.Map(homeInitialState);
+import home from './home/homeInitialState';
+import movies from './movies/moviesInitialState';
 
 export default {
-  home
+  home,
+  movies
 };

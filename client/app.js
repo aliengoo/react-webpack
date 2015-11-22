@@ -16,12 +16,14 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import store from './store';
 
 import Home from './home/Home';
+import Movies from './movies/Movies';
 
 var reactContainer = document.getElementById('react-container');
 
 var providerRoot = <Provider store={store}>
   <Router history={history()}>
     <Route path="/" component={Home}/>
+    <Route path="/movies" component={Movies}/>
   </Router>
 </Provider>;
 

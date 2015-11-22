@@ -1,6 +1,7 @@
 //https://github.com/webpack/webpack-with-common-libs/blob/master/gulpfile.js
 
 var path = require('path');
+var format = require('util').format;
 
 var gulp = require('gulp');
 var lp = require('gulp-load-plugins')({
@@ -19,6 +20,8 @@ var importScssConfig = {
     "./client/**/*.scss"
   ]
 };
+
+var webpackDevServerPort = 8081;
 
 // The development server (the recommended option for development)
 gulp.task("default", ["webpack-dev-server"], function(){
@@ -112,12 +115,12 @@ gulp.task('webpack-dev-server', ['import:scss'], function () {
     stats: {
       colors: true
     }
-  }).listen(8081, "localhost", function(err){
+  }).listen(webpackDevServerPort, "localhost", function(err){
 
     if (err) {
       throw new lp.util.PluginError('webpack-dev-server', err);
     }
-    lp.util.log('[webpack-dev-server]', 'http://localhost:8081/webpack-dev-server/index.html');
+    lp.util.log('[webpack-dev-server]', format('http://localhost:%s/webpack-dev-server/index.html', webpackDevServerPort));
   });
 });
 
